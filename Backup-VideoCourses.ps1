@@ -1,40 +1,5 @@
-<# TODO: 
-- add selection menu with Out-ConsoleGridView
-- refactor loop logic
-    - create a new PSCustomObject variable to contain all course data
-    - on each loop iteration, add a new record to the object with the current values
-    - pass the completed PSCustomObject to a ForEach-Object loop
-    - add optional parallelism parameter; default value = 1
-- add optional "CourseName" parameter; default value = "All"
-- add parameter to choose downloader
-    - PS Module wrappers for ffmpeg, yt-dlp, etc?
-    - add error handling and logging
-- add parameter for verbose console output; default value = false
-- add ability to resume partial downloads
-- clean up variables:
-    - remove non-numeric characters from $courseNumber, $sectionNumber, $lessonNumber variables
-    - remove non-alphabetic and non-punctuation characters from $courseName, $sectionName, $lessonName variables
-    - trim and eliminate redundant spaces from all variables
-- refactor file path handling
-    - split PascalCase course names into separate words
-    - make functions for file path parsing
-    - eliminate duplicate code
-    - eliminate dummy delimiters
-- add parameter for NestedFolderDepth; integer value from 0 to 3; default value = 3
-    - case 3:
-        - create a folder for each AppName, CourseName, and SectionName
-        - name files "LessonNumber - LessonName"
-    - case 2:
-        - create a folder for each AppName and CourseName
-        - name files "SectionNumber - SectionName - LessonNumber - LessonName"
-    - case 1:
-        - create a folder for each AppName
-        - name files "CourseNumber - CourseName - SectionNumber - SectionName - LessonNumber - LessonName"
-    - case 0:
-        - name files "AppName - CourseNumber - CourseName - SectionNumber - SectionName - LessonNumber - LessonName"
-- add metadata to video files
-- add subtitles to video files
-- add "--help" parameter
+<#
+Author: @JamesDBartlett3
 #>
 
 Function Backup-VideoCourses {
