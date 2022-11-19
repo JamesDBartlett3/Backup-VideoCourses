@@ -1,5 +1,10 @@
 <#
 Author: @JamesDBartlett3
+TODO:
+  - Use Out-ConsoleGridView to select which courses to backup
+  - Add support for courses
+  - Add support for topics
+  - Use logging to detect if a download was interrupted and resume/restart
 #>
 
 Function Backup-VideoCourses {
