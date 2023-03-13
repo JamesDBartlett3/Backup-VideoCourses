@@ -1,5 +1,5 @@
 <#
-Author: @JamesDBartlett3
+Author: @JamesDBartlett3@techhub.social
 TODO:
   - Use Out-ConsoleGridView to select which courses to backup
   - Add support for courses
