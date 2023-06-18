@@ -25,12 +25,15 @@ Function Backup-VideoCourses {
     ForEach-Object {
       $courseUrl = "https://$DomainName/ajax/videos/$_"
       (Invoke-RestMethod -Method GET -Uri $courseUrl -ContentType "application/json;charset=utf-8").data.videos | 
-      Select-Object -Property tutorial, ned_programmanifest, video_medium
+      Select-Object -Property tutorial, ned_programmanifest, @{Name = 'video_medium'; Expression = {
+        $_.thumbnail_medium.mediaURL.Substring(0, ($_.thumbnail_medium.mediaURL |
+          Select-String -Pattern '/' -AllMatches |
+          Select-Object -First 4).Matches[3].Index + 1) + "hls.m3u8"}}
     }
   
   $tutorial = $courseContent | Select-Object -ExpandProperty tutorial
   $ned_programmanifest = $courseContent | Select-Object -ExpandProperty ned_programmanifest
-  $video_medium = $courseContent | Select-Object -ExpandProperty video_medium
+  $video_medium = $courseContent | Select-Object -Property video_medium
   $numberOfVideos = $courseContent.Count
   
   $targetDirectory = "$((Get-Location).Path)\$AppName"
@@ -46,7 +49,7 @@ Function Backup-VideoCourses {
     $sectionTitle = $ned_programmanifest[$i].sec_title
     $lessonNumber = ([string]$ned_programmanifest[$i].serial_number).PadLeft(2,'0')
     $lessonTitle = $ned_programmanifest[$i].vid_title
-    $videoURL = $video_medium[$i].mediaURL
+    $videoURL = $video_medium[$i].video_medium
     
     $filePath = "$courseNumber - $courseTitle⌿$sectionNumber - $sectionTitle⌿$lessonNumber - $lessonTitle"
     
