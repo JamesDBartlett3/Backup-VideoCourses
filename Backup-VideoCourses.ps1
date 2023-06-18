@@ -1,5 +1,5 @@
 <#
-Author: @JamesDBartlett3
+Author: @JamesDBartlett3@techhub.social
 TODO:
   - Get actual course titles for display in Out-ConsoleGridView, rather than their shortened versions as is current behavior
   - Add support for courses
