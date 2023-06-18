@@ -1,7 +1,7 @@
 <#
 Author: @JamesDBartlett3
 TODO:
-  - Use Out-ConsoleGridView to select which courses to backup
+  - Get actual course titles for display in Out-ConsoleGridView, rather than their shortened versions as is current behavior
   - Add support for courses
   - Add support for topics
   - Use logging to detect if a download was interrupted and resume/restart
@@ -15,13 +15,11 @@ Function Backup-VideoCourses {
     [parameter(Mandatory = $false)][string]$FileType = 'mp4'
   )
   
-  <# Out-ConsoleGridView requires this module, so un-comment when that feature is finished
   #requires -Module Microsoft.PowerShell.ConsoleGuiTools
-  #>
   
   $courseURLs = ((Invoke-WebRequest -Method GET -Uri "https://$DomainName/library/application/$AppName").Links | 
     Where-Object -Property class -like "*Coursetiles__link*").href |
-    Split-Path -Leaf
+    Split-Path -Leaf | Out-ConsoleGridView
   
   $courseContent = $courseURLs |
     ForEach-Object {
